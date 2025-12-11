@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Matrix | Cybersecurity Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000000;
+            color: #00FF41;
+            overflow-x: hidden;
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            border-bottom: 2px solid #00FF41;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00FF41;
+            text-shadow: 0 0 10px #00FF41;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 2px solid #00FF41;
+            background: transparent;
+            color: #00FF41;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #00FF41;
+            color: #000000;
+            box-shadow: 0 0 20px #00FF41;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 96px;
+            color: #00FF41;
+            text-shadow: 0 0 20px #00FF41;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin: 20px 0;
+            color: rgba(0, 255, 65, 0.8);
+        }
+
+        .hero-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modules {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: #00FF41;
+        }
+
+        .view-all-btn {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .module-card {
+            border: 2px solid #00FF41;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .module-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
+        }
+
+        .module-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .module-title {
+            font-size: 24px;
+            color: #00FF41;
+            margin-bottom: 10px;
+        }
+
+        .module-desc {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature-tag {
+            font-size: 12px;
+            padding: 8px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            color: rgba(0, 255, 65, 0.7);
+            text-align: center;
+        }
+
+        .footer {
+            border-top: 2px solid #00FF41;
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
+            margin-top: 80px;
+        }
+
+        .footer p {
+            color: #00FF41;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(0, 255, 65, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: #00FF41;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="content">
+        <div class="header">
+            <div class="logo" onclick="goHome()">> THE_MATRIX</div>
+            <button class="btn" onclick="goDashboard()">Enter System</button>
+        </div>
+
+        <div class="hero">
+            <h1>THE MATRIX</h1>
+            <p>Unified Cybersecurity Intelligence Platform</p>
+            <p style="font-size: 16px; max-width: 800px; margin: 20px auto; color: rgba(255,255,255,0.6);">
+                Next-generation platform combining network protection, social safety, 
+                cyber training, and community intelligence under one unified interface
+            </p>
+            <div class="hero-buttons">
+                <button class="btn" onclick="goDashboard()">Launch Dashboard</button>
+                <button class="btn" onclick="goDocs()">Documentation</button>
+                <button class="btn" onclick="goModules()">View All Modules</button>
+            </div>
+        </div>
+
+        <div class="modules">
+            <h2 class="section-title">> SELECT_MODULE</h2>
+            
+            <div class="view-all-btn">
+                <button class="btn" onclick="goModules()" style="font-size: 16px; padding: 12px 24px;">
+                    📋 View All Modules →
+                </button>
+            </div>
+            
+            <div class="modules-grid">
+                <div class="module-card" onclick="goDashboard()">
+                    <div class="module-icon">🔒</div>
+                    <h3 class="module-title">Smart Network Security</h3>
+                    <p class="module-desc">
+                        Real-time network monitoring, IDS/IPS, threat detection and automated response
+                    </p>
+                    <div class="features-list">
+                        <div class="feature-tag">Live Monitoring</div>
+                        <div class="feature-tag">Threat Scoring</div>
+                        <div class="feature-tag">Auto Blocking</div>
+                        <div class="feature-tag">Deep Inspection</div>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="goDashboard(); event.stopPropagation();">Access Module →</button>
+                </div>
+
+                <div class="module-card" onclick="comingSoon('Cyberbullying Protection')">
+                    <div class="module-icon">🛡️</div>
+                    <h3 class="module-title">Cyberbullying Protection</h3>
+                    <p class="module-desc">
+                        AI-powered toxicity detection and content moderation for social platforms
+                    </p>
+                    <div class="features-list">
+                        <div class="feature-tag">NLP Analysis</div>
+                        <div class="feature-tag">Real-time Alerts</div>
+                        <div class="feature-tag">Content Filtering</div>
+                        <div class="feature-tag">Parent Dashboard</div>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="comingSoon('Cyberbullying Protection'); event.stopPropagation();">Coming Soon</button>
+                </div>
+
+                <div class="module-card" onclick="comingSoon('Incident Response Simulator')">
+                    <div class="module-icon">🎮</div>
+                    <h3 class="module-title">Incident Response Simulator</h3>
+                    <p class="module-desc">
+                        Gamified cyber range with realistic attack scenarios and SOC training
+                    </p>
+                    <div class="features-list">
+                        <div class="feature-tag">Attack Scenarios</div>
+                        <div class="feature-tag">XP & Badges</div>
+                        <div class="feature-tag">SOC Training</div>
+                        <div class="feature-tag">MITRE ATT&CK</div>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="comingSoon('Incident Response Simulator'); event.stopPropagation();">Coming Soon</button>
+                </div>
+
+                <div class="module-card" onclick="comingSoon('Community Connect')">
+                    <div class="module-icon">👥</div>
+                    <h3 class="module-title">Community Connect</h3>
+                    <p class="module-desc">
+                        Collaborative ecosystem for sharing threat intelligence and cybersecurity knowledge
+                    </p>
+                    <div class="features-list">
+                        <div class="feature-tag">Q&A Forum</div>
+                        <div class="feature-tag">Incident Sharing</div>
+                        <div class="feature-tag">Expert Network</div>
+                        <div class="feature-tag">Cyber News Feed</div>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="comingSoon('Community Connect'); event.stopPropagation();">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 THE_MATRIX | Cybersecurity Platform</p>
+            <div class="footer-links">
+                <a onclick="goHome()">Home</a>
+                <a onclick="goDocs()">Documentation</a>
+                <a onclick="goModules()">Modules</a>
+                <a onclick="goDashboard()">Dashboard</a>
+                <a onclick="comingSoon('Contact')">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00FF41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function goDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+
+        function goDocs() {
+            window.location.href = 'documentation.html';
+        }
+
+        function goModules() {
+            window.location.href = 'modules.html';
+        }
+
+        function comingSoon(module) {
+            alert(module + ' - Coming Soon in Q1/Q2 2026!');
+        }
+
+        console.log('> THE_MATRIX System Initialized...');
+    </script>
+</body>
+</html>

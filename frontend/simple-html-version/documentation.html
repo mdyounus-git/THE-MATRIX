@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | The Matrix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000000;
+            color: #00FF41;
+            line-height: 1.8;
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            border-bottom: 2px solid #00FF41;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00FF41;
+            text-shadow: 0 0 10px #00FF41;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 2px solid #00FF41;
+            background: transparent;
+            color: #00FF41;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #00FF41;
+            color: #000000;
+            box-shadow: 0 0 15px #00FF41;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #00FF41;
+            text-shadow: 0 0 15px #00FF41;
+        }
+
+        .breadcrumb {
+            color: rgba(0, 255, 65, 0.6);
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .doc-section {
+            border: 2px solid #00FF41;
+            padding: 30px;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #00FF41;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .subsection-title {
+            font-size: 20px;
+            color: #00FF41;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: rgba(0, 255, 65, 0.1);
+            padding: 2px 8px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            color: #00FF41;
+            border-radius: 3px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00FF41;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            color: #00FF41;
+        }
+
+        .warning-box {
+            border-left: 4px solid #FFA500;
+            background: rgba(255, 165, 0, 0.1);
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            border-left: 4px solid #00FF41;
+            background: rgba(0, 255, 65, 0.1);
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .nav-card {
+            border: 2px solid #00FF41;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+
+        .nav-card h3 {
+            color: #00FF41;
+            margin-bottom: 10px;
+        }
+
+        .nav-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="content">
+        <div class="header">
+            <div class="logo" onclick="window.location.href='index.html'">> THE_MATRIX</div>
+            <a href="index.html" class="btn">← Back to Home</a>
+        </div>
+
+        <div class="container">
+            <h1 class="page-title">> DOCUMENTATION</h1>
+            <div class="breadcrumb">Home > Documentation</div>
+
+            <!-- Overview Section -->
+            <div class="doc-section">
+                <h2 class="section-title">📚 Platform Overview</h2>
+                <p>
+                    The Matrix is a next-generation cybersecurity platform that provides comprehensive network protection, 
+                    social safety monitoring, cyber training, and community-driven threat intelligence.
+                </p>
+                <p>
+                    Built with enterprise-grade security in mind, The Matrix combines multiple cybersecurity modules 
+                    into a unified interface with real-time monitoring and automated response capabilities.
+                </p>
+            </div>
+
+            <!-- Getting Started -->
+            <div class="doc-section">
+                <h2 class="section-title">🚀 Getting Started</h2>
+                
+                <h3 class="subsection-title">System Requirements</h3>
+                <ul>
+                    <li><strong>Operating System:</strong> Windows 10/11, Linux (Ubuntu 20.04+), macOS 11+</li>
+                    <li><strong>RAM:</strong> Minimum 8GB (16GB recommended)</li>
+                    <li><strong>Storage:</strong> 500GB available space</li>
+                    <li><strong>Network:</strong> Stable internet connection</li>
+                    <li><strong>Browser:</strong> Chrome 90+, Firefox 88+, Edge 90+</li>
+                </ul>
+
+                <h3 class="subsection-title">Quick Start</h3>
+                <ol>
+                    <li>Access the platform at <code>http://localhost:5500</code></li>
+                    <li>Click "Enter System" to access the main dashboard</li>
+                    <li>Select a module from the homepage</li>
+                    <li>Configure your security settings</li>
+                    <li>Start monitoring your network</li>
+                </ol>
+
+                <div class="info-box">
+                    <strong>💡 Pro Tip:</strong> Start with the Smart Network Security Module (SNSM) 
+                    to get familiar with the platform's core monitoring capabilities.
+                </div>
+            </div>
+
+            <!-- Modules Documentation -->
+            <div class="doc-section">
+                <h2 class="section-title">🔧 Platform Modules</h2>
+
+                <h3 class="subsection-title">1. Smart Network Security Module (SNSM)</h3>
+                <p>
+                    Real-time network monitoring with IDS/IPS capabilities, behavioral anomaly detection, 
+                    and automated threat response.
+                </p>
+                <ul>
+                    <li><strong>Packet Capture:</strong> Low-overhead capture using dumpcap</li>
+                    <li><strong>Deep Inspection:</strong> Zeek + Suricata analysis engines</li>
+                    <li><strong>Threat Scoring:</strong> AI-enhanced scoring (0-100 scale)</li>
+                    <li><strong>Auto Blocking:</strong> Dynamic firewall rules via nftables</li>
+                </ul>
+
+                <h3 class="subsection-title">2. Cyberbullying Protection</h3>
+                <p>
+                    AI-powered content moderation using NLP and toxicity detection models.
+                </p>
+                <ul>
+                    <li><strong>Real-time Analysis:</strong> Instant message classification</li>
+                    <li><strong>Parent Dashboard:</strong> Monitoring and alert system</li>
+                    <li><strong>Content Filtering:</strong> Automatic redaction</li>
+                </ul>
+
+                <h3 class="subsection-title">3. Incident Response Simulator</h3>
+                <p>
+                    Gamified SOC training with realistic attack scenarios.
+                </p>
+                <ul>
+                    <li><strong>Attack Scenarios:</strong> Phishing, SQL injection, ransomware</li>
+                    <li><strong>XP & Badges:</strong> Progression system</li>
+                    <li><strong>MITRE ATT&CK:</strong> Framework-aligned training</li>
+                </ul>
+
+                <h3 class="subsection-title">4. Community Connect</h3>
+                <p>
+                    Collaborative threat intelligence sharing platform.
+                </p>
+                <ul>
+                    <li><strong>Q&A Forum:</strong> Ask and answer security questions</li>
+                    <li><strong>Incident Sharing:</strong> Share and analyze incidents</li>
+                    <li><strong>Expert Network:</strong> Connect with professionals</li>
+                </ul>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="doc-section">
+                <h2 class="section-title">⚙️ API Documentation</h2>
+                
+                <h3 class="subsection-title">Base URL</h3>
+                <div class="code-block">http://localhost:8000/api/v1</div>
+
+                <h3 class="subsection-title">Authentication</h3>
+                <p>All API requests require a valid JWT token in the Authorization header:</p>
+                <div class="code-block">Authorization: Bearer YOUR_JWT_TOKEN</div>
+
+                <h3 class="subsection-title">Key Endpoints</h3>
+                <div class="code-block">
+GET  /api/alerts          - Fetch recent alerts<br>
+GET  /api/threat-score    - Get current threat score<br>
+POST /api/agent/register  - Register new agent<br>
+GET  /api/flows           - Retrieve network flows<br>
+POST /api/block-ip        - Block IP address
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Warning:</strong> API keys should never be exposed in client-side code. 
+                    Always use environment variables and secure token storage.
+                </div>
+            </div>
+
+            <!-- Architecture -->
+            <div class="doc-section">
+                <h2 class="section-title">🏗️ Architecture</h2>
+                
+                <h3 class="subsection-title">System Components</h3>
+                <ul>
+                    <li><strong>Frontend:</strong> HTML/CSS/JavaScript (Matrix theme)</li>
+                    <li><strong>Backend:</strong> Python FastAPI microservices</li>
+                    <li><strong>Agent:</strong> Python + Rust network monitor</li>
+                    <li><strong>Database:</strong> PostgreSQL + Redis</li>
+                    <li><strong>Message Queue:</strong> Redis Streams / Kafka</li>
+                    <li><strong>Logs:</strong> Loki + ClickHouse</li>
+                </ul>
+
+                <h3 class="subsection-title">Data Flow</h3>
+                <ol>
+                    <li>Agent captures network packets (dumpcap)</li>
+                    <li>Zeek/Suricata analyze traffic</li>
+                    <li>Logs sent to backend via WebSocket/REST</li>
+                    <li>Correlation engine processes alerts</li>
+                    <li>Threat score computed (AI + rules)</li>
+                    <li>Dashboard displays real-time data</li>
+                    <li>Auto-blocking triggered if needed</li>
+                </ol>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="doc-section">
+                <h2 class="section-title">🔍 Troubleshooting</h2>
+                
+                <h3 class="subsection-title">Common Issues</h3>
+                
+                <p><strong>Q: Dashboard not loading?</strong></p>
+                <p>A: Ensure Live Server is running and you're accessing the correct port (5500)</p>
+
+                <p><strong>Q: Matrix rain not showing?</strong></p>
+                <p>A: Check browser console for JavaScript errors. Refresh the page.</p>
+
+                <p><strong>Q: Backend not connecting?</strong></p>
+                <p>A: Verify backend is running on port 8000. Check CORS settings.</p>
+
+                <p><strong>Q: Agent not registering?</strong></p>
+                <p>A: Ensure agent has network permissions and correct API endpoint.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="doc-section">
+                <h2 class="section-title">🔗 Quick Links</h2>
+                <div class="nav-links">
+                    <div class="nav-card" onclick="window.location.href='dashboard.html'">
+                        <h3>📊 Dashboard</h3>
+                        <p>Access live monitoring</p>
+                    </div>
+                    <div class="nav-card" onclick="window.location.href='index.html'">
+                        <h3>🏠 Home</h3>
+                        <p>Return to homepage</p>
+                    </div>
+                    <div class="nav-card" onclick="alert('API Reference - Coming Soon')">
+                        <h3>📖 API Reference</h3>
+                        <p>Detailed API docs</p>
+                    </div>
+                    <div class="nav-card" onclick="alert('Video Tutorials - Coming Soon')">
+                        <h3>🎥 Tutorials</h3>
+                        <p>Watch video guides</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="border-top: 2px solid #00FF41; padding: 30px; text-align: center; margin-top: 50px;">
+                <p>© 2025 THE_MATRIX | Cybersecurity Platform</p>
+                <p style="font-size: 12px; margin-top: 10px;">Version 1.0.0 | Last Updated: December 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00FF41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
